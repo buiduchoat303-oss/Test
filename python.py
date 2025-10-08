@@ -76,7 +76,7 @@ def get_ai_analysis(data_for_ai, api_key):
     except APIError as e:
         return f"Lỗi gọi Gemini API: Vui lòng kiểm tra Khóa API hoặc giới hạn sử dụng. Chi tiết lỗi: {e}"
     except KeyError:
-        return "Lỗi: Không tìm thấy Khóa API 'GEMINI_API_KEY'. Vui lòng kiểm tra cấu hình Secrets trên Streamlit Cloud."
+        return "Lỗi: Không tìm thấy Khóa API 'GEMINI_API_KEY=AIzaSyD7U813JpdjEVVPm2Q3KmsybokzOAjxYHg'. Vui lòng kiểm tra cấu hình Secrets trên Streamlit Cloud."
     except Exception as e:
         return f"Đã xảy ra lỗi không xác định: {e}"
 
@@ -166,7 +166,7 @@ if uploaded_file is not None:
             }).to_markdown(index=False) 
 
             if st.button("Yêu cầu AI Phân tích"):
-                api_key = st.secrets.get("GEMINI_API_KEY") 
+                api_key = st.secrets.get("GEMINI_API_KEY=AIzaSyD7U813JpdjEVVPm2Q3KmsybokzOAjxYHg") 
                 
                 if api_key:
                     with st.spinner('Đang gửi dữ liệu và chờ Gemini phân tích...'):
@@ -174,7 +174,7 @@ if uploaded_file is not None:
                         st.markdown("**Kết quả Phân tích từ Gemini AI:**")
                         st.info(ai_result)
                 else:
-                     st.error("Lỗi: Không tìm thấy Khóa API. Vui lòng cấu hình Khóa 'GEMINI_API_KEY' trong Streamlit Secrets.")
+                     st.error("Lỗi: Không tìm thấy Khóa API. Vui lòng cấu hình Khóa 'GEMINI_API_KEY=AIzaSyD7U813JpdjEVVPm2Q3KmsybokzOAjxYHg' trong Streamlit Secrets.")
 
     except ValueError as ve:
         st.error(f"Lỗi cấu trúc dữ liệu: {ve}")
